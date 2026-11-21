@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaziranga National Park | Vanya Safari</title>
+
+    <style>
+
+        /* GENERAL SETTINGS */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #E8EFE5; color: #26352D; line-height: 1.7; }
+
+        /* NAVIGATION BAR */
+        nav { background-color: #1F4D3A; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        nav h2 { color: #DDAA43; margin: 0; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        nav a:hover { color: #DDAA43; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url("images/kaziranga/hero.jpg");
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 25px;
+        }
+        .hero h1 { font-size: 48px; color: #F0BC5E; }
+        .hero p { font-size: 19px; max-width: 750px; }
+        .button { display: inline-block; background-color: #DDAA43; color: #172C20; padding: 12px 25px; border-radius: 7px; text-decoration: none; font-weight: bold; }
+        .button:hover { background-color: #F0BC5E; }
+
+        /* COMMON SECTION SETTINGS */
+        section { padding: 40px 6%; margin: 15px auto; }
+        .section-title { text-align: center; color: #1F4D3A; font-size: 30px; margin-bottom: 25px; }
+
+        /* ABOUT SECTION */
+        .about { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 15px; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .about-content img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; border: 4px solid #1F4D3A; }
+
+        /* PARK HIGHLIGHTS */
+        .highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .highlight-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .highlight-card img { width: 100%; height: 190px; object-fit: cover; }
+        .highlight-card h3 { color: #1F4D3A; }
+        .highlight-card p { padding: 0 15px 15px; }
+
+        /* BEST TIME TO VISIT */
+        .season-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .season-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; padding: 20px; }
+        .season-card h3 { color: #1F4D3A; }
+        .recommended { background-color: #D5E2D4; }
+
+        /* ZONE TABLE */
+        .table-container { overflow-x: auto; background-color: #F8F5EA; padding: 15px; border: 2px solid #1F4D3A; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        th { background-color: #1F4D3A; color: white; padding: 14px; }
+        td { padding: 13px; border-bottom: 1px solid #C9D3C8; }
+        tr:nth-child(even) { background-color: #E8EFE5; }
+
+        /* ANIMAL GALLERY */
+        .animals { background-color: #D5E2D4; border-radius: 15px; }
+        .animal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .animal-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .animal-card img { width: 100%; height: 170px; object-fit: cover; }
+        .animal-card h3 { color: #1F4D3A; margin: 8px; }
+
+        /* GLIMPSE GALLERY */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .gallery-grid img { width: 100%; height: 190px; object-fit: cover; border-radius: 12px; border: 3px solid #1F4D3A; transition: transform 0.3s; }
+        .gallery-grid img:hover { transform: scale(1.04); }
+
+        /* BOOKING BANNER */
+        .booking {
+            background: linear-gradient(rgba(31,77,58,0.8), rgba(31,77,58,0.8)), url("images/kaziranga/banner.jpg");
+            background-size: cover; background-position: center;
+            color: white; text-align: center; border-radius: 15px; padding: 60px 20px;
+        }
+        .booking h2 { color: #F0BC5E; font-size: 32px; }
+        .book-btn { background-color: #DDAA43; color: #172C20; text-decoration: none; padding: 12px 25px; border-radius: 10px; display: inline-block; font-weight: bold; transition: 0.3s; }
+        .book-btn:hover { background-color: #F0BC5E; color: white; }
+
+        /* FOOTER */
+        footer { background-color: #163D2E; color: white; text-align: center; padding: 30px; }
+        footer a { color: #DDAA43; text-decoration: none; }
+
+        /* BACK TO TOP */
+        .top { position: fixed; bottom: 20px; right: 20px; background-color: #DDAA43; color: black; padding: 10px 15px; border-radius: 50%; text-decoration: none; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            .about-content { grid-template-columns: 1fr; }
+            .animal-grid, .gallery-grid, .highlight-grid, .season-grid { grid-template-columns: 1fr 1fr; }
+            nav { flex-wrap: wrap; gap: 10px; }
+        }
+        @media (max-width: 550px) {
+            .hero h1 { font-size: 32px; }
+            nav a { margin: 4px; font-size: 13px; }
+        }
+
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <h2>VANYA SAFARI</h2>
+        <div>
+            <a href="htmlcode.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#zones">Zones</a>
+            <a href="#animals">Animals</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1>Kaziranga National Park</h1>
+        <p>
+            Discover the wild floodplains of Assam. Explore tall grasslands, wetlands and forest where the Great Indian One-Horned Rhinoceros roams free.
+        </p>
+        <a href="#about" class="button">Explore the Park</a>
+    </header>
+
+
+    <!-- ABOUT THE PARK -->
+    <section class="about" id="about">
+
+        <h2 class="section-title">About Kaziranga National Park</h2>
+
+        <div class="about-content">
+
+            <img src="images3/kaziranga.jpg" alt="Kaziranga grassland with rhinoceros">
+
+            <div>
+                <h3>Land of the One-Horned Rhino</h3>
+
+                <p>
+                    Kaziranga National Park lies on the floodplain of the Brahmaputra River in Assam, at the foothills of the Karbi Anglong hills. It stretches across the Golaghat, Nagaon and Sonitpur districts and is a UNESCO World Heritage Site.
+                </p>
+
+                <p>
+                    The park protects around two-thirds of the world’s Great Indian One-Horned Rhinoceroses, along with large herds of wild water buffalo and the rare eastern swamp deer.
+                </p>
+
+                <p>
+                    Its “Big Five” are the tiger, rhinoceros, elephant, wild buffalo and eastern swamp deer. Kaziranga became a tiger reserve in 2006.
+                </p>
+
+                <p>
+                    Tall elephant grass, marshes, shallow lakes and woodland make it one of India’s finest places for wildlife viewing and birdwatching, with around 480 recorded bird species.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PARK HIGHLIGHTS -->
+    <section>
+
+        <h2 class="section-title">Discover the Beauty of Kaziranga</h2>
+
+        <div class="highlight-grid">
+
+            <div class="highlight-card">
+                <img src="images3/kazifloodpains.jpg" alt="Brahmaputra River">
+                <h3>Brahmaputra Floodplain</h3>
+                <p>
+                    The mighty Brahmaputra shapes the park, and its seasonal floods renew the grasslands and wetlands that wildlife depends on.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images3/kwetandgarssland.jpg" alt="Kaziranga grasslands and wetlands">
+                <h3>Grasslands and Wetlands</h3>
+                <p>
+                    Tall grass, marshes and shallow water bodies provide habitat for rhinos, buffalo, swamp deer and many waterbirds.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images3/khills.jpg" alt="Karbi Anglong hills">
+                <h3>Karbi Anglong Hills</h3>
+                <p>
+                    The hills to the south, reached through the Burapahar range, add forest scenery and give animals higher ground during floods.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BEST TIME TO VISIT -->
+    <section id="season">
+
+        <h2 class="section-title">Best Time to Visit Kaziranga</h2>
+
+        <p>
+            Kaziranga runs on a seasonal schedule. The park closes for the monsoon, so planning your dates around the opening period is important.
+        </p>
+
+        <div class="season-grid">
+
+            <div class="season-card recommended">
+                <h3>Winter Season</h3>
+                <h4>October – February</h4>
+                <p>
+                    The park reopens after the monsoon, with the 2026–27 season starting on 3 October. Early-season grass is tall, so sightings improve as winter goes on and the weather stays cool.
+                </p>
+                <b>Ideal for:</b>
+                <p>Rhino viewing, photography and birdwatching.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Spring Season</h3>
+                <h4>March – April</h4>
+                <p>
+                    Days become warmer as the season comes to a close. Animals often gather near water bodies, though sightings are never guaranteed.
+                </p>
+                <b>Ideal for:</b>
+                <p>Visitors looking for fewer crowds.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Monsoon Season</h3>
+                <h4>May – September</h4>
+                <p>
+                    Heavy rain and Brahmaputra floods close the park to visitors, and animals move to higher ground.
+                </p>
+                <b>Ideal for:</b>
+                <p>Planning ahead for the next season.</p>
+            </div>
+
+        </div>
+
+        <p>
+            <b>Visitor note:</b>
+            Opening dates, safari timings and range availability can change each year, and ranges may reopen in stages. Always check the latest official schedule before planning your safari.
+        </p>
+
+    </section>
+
+
+    <!-- SAFARI ZONES -->
+    <section id="zones">
+
+        <h2 class="section-title">Explore the Safari Ranges</h2>
+
+        <p>
+            Kaziranga is organised into ranges rather than numbered zones. Core areas span roughly 482 sq km and buffer areas about 548 sq km, with tourism managed across the designated ranges.
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Safari Range</th>
+                    <th>Known For</th>
+                    <th>Safari Type</th>
+                    <th>Visiting Period</th>
+                </tr>
+
+                <tr>
+                    <td>Central Range (Kohora)</td>
+                    <td>Main tourist hub with wetlands and tall grass; rhinos and swamp deer</td>
+                    <td>Jeep and elephant</td>
+                    <td>Seasonal*</td>
+                </tr>
+
+                <tr>
+                    <td>Western Range (Bagori)</td>
+                    <td>Very high rhino density and fine landscape views; popular for morning elephant rides</td>
+                    <td>Jeep and elephant</td>
+                    <td>Seasonal*</td>
+                </tr>
+
+                <tr>
+                    <td>Eastern Range (Agoratoli)</td>
+                    <td>Water bodies, birdwatching and wild water buffalo</td>
+                    <td>Jeep</td>
+                    <td>Seasonal*</td>
+                </tr>
+
+                <tr>
+                    <td>Burapahar Range</td>
+                    <td>Hilly terrain, panoramic views and guided nature treks</td>
+                    <td>Jeep</td>
+                    <td>Seasonal*</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <p>
+            *Kaziranga closes for the monsoon, and the 2026–27 season reopened on 3 October 2026. Elephant safaris run only in the Kohora and Bagori ranges. Dates and rules may change, so confirm with the forest department.
+        </p>
+
+    </section>
+
+
+    <!-- ANIMALS SECTION -->
+    <section class="animals" id="animals">
+
+        <h2 class="section-title">Animals You Can Spot @ Kaziranga</h2>
+
+        <p style="text-align:center;">
+            The “Big Five” share the park with wild cats, deer, primates and river wildlife.
+        </p>
+
+        <div class="animal-grid">
+
+            <div class="animal-card">
+                <img src="images3/rihno.jpg" alt="Greater One-Horned Rhinoceros">
+                <h3>Greater One-Horned Rhinoceros</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="tiger.webp" alt="Royal Bengal Tiger">
+                <h3>Royal Bengal Tiger</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/asianelphant.jpg" alt="Asian Elephant">
+                <h3>Asian Elephant</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/buffaloo.jpg" alt="Wild Water Buffalo">
+                <h3>Wild Water Buffalo</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/swampdeer.jpg" alt="Eastern Swamp Deer">
+                <h3>Eastern Swamp Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="leoperd.jpg" alt="Leopard">
+                <h3>Leopard</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/fishingcat.jpg" alt="Fishing Cat">
+                <h3>Fishing Cat</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/images1/junglecat.jpg" alt="Jungle Cat">
+                <h3>Jungle Cat</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/leoparcat.jpg" alt="Leopard Cat">
+                <h3>Leopard Cat</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/gaur.jpg" alt="Gaur">
+                <h3>Gaur</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="sambar.jpg" alt="Sambar Deer">
+                <h3>Sambar Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/haugdeer.jpg" alt="Hog Deer">
+                <h3>Hog Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/images1/slothbear.jpg" alt="Sloth Bear">
+                <h3>Sloth Bear</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/holookgibon.jpg" alt="Hoolock Gibbon">
+                <h3>Hoolock Gibbon</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/langoor.jpg" alt="Capped Langur">
+                <h3>Capped Langur</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/dolphin.jpg" alt="Gangetic River Dolphin">
+                <h3>Gangetic River Dolphin</h3>
+            </div>
+
+        </div>
+
+        <p>
+            Kaziranga has about 35 recorded mammal species and around 480 bird species, along with turtles, snakes, frogs and fish. Actual sightings depend on season, habitat and natural conditions.
+        </p>
+
+    </section>
+
+
+    <!-- GLIMPSE GALLERY -->
+    <section id="gallery">
+
+        <h2 class="section-title">Glimpse @ Kaziranga</h2>
+
+        <p style="text-align:center;">
+            Landscapes, wildlife and memorable moments from Kaziranga National Park.
+        </p>
+
+        <div class="gallery-grid">
+            <img src="images3/klandscape.jpg" alt="Kaziranga landscape">
+            <img src="images3/rhino in the field.jpg" alt="One-horned rhinoceros">
+            <img src="images3/tiger in kaziranga.jpg" alt="Tiger in Kaziranga">
+            <img src="images3/eleohantin kaziranga.jpg" alt="Elephants in the grassland">
+            <img src="images3/ksafari.jpg" alt="Jeep safari">
+            <img src="images3/kwetlands.jpg" alt="Wetland with birds">
+            <img src="images3/kbirds.jpg" alt="Birds of Kaziranga">
+            <img src="images3/burapaharvhills.jpg" alt="Burapahar hills">
+        </div>
+
+    </section>
+
+
+    <!-- BOOKING / PERMIT SECTION -->
+    <section>
+
+        <div class="booking">
+
+            <h2>Plan Your Visit to Kaziranga</h2>
+
+            <p>
+                Experience the grasslands of Assam and plan your journey to the home of the one-horned rhinoceros.
+            </p>
+
+            <p>
+                Check official permit availability, safari timings and
+                visitor information before your visit.
+            </p>
+
+            <a href="booking.html" class="book-btn">Book Now</a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>VANYA SAFARI</h2>
+
+        <p>Experience Nature. Explore Wildlife. Create Memories.</p>
+
+        <p>
+            <a href="htmlcode.html">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#zones">Zones</a> |
+            <a href="#gallery">Gallery</a>
+        </p>
+
+        <p>&copy; 2026 Vanya Safari. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <!-- BACK TO TOP BUTTON -->
+    <a href="#top" class="top">↑</a>
+
+</body>
+</html>

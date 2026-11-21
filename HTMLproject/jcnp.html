@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jim Corbett National Park | Vanya Safari</title>
+
+    <style>
+
+        /* GENERAL SETTINGS */
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #E8EFE5;
+            color: #26352D;
+            line-height: 1.7;
+        }
+
+        /* NAVIGATION BAR */
+
+        nav {
+            background-color: #1F4D3A;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav h2 {
+            color: #DDAA43;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #DDAA43;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            height: 500px;
+
+            background:
+            linear-gradient(rgba(0,0,0,0.4),
+            rgba(0,0,0,0.5)),
+            url("images/corbett-hero.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+            color: white;
+            padding: 25px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #F0BC5E;
+        }
+
+        .hero p {
+            font-size: 19px;
+            max-width: 750px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #DDAA43;
+            color: #172C20;
+            padding: 12px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #F0BC5E;
+        }
+
+        /* COMMON SECTION SETTINGS */
+
+        section {
+            padding: 40px 6%;
+            margin: 15px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1F4D3A;
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        /* ABOUT SECTION */
+
+        .about {
+            background-color: #F8F5EA;
+            border: 2px solid #1F4D3A;
+            border-radius: 15px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-content img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 4px solid #1F4D3A;
+        }
+
+        /* PARK HIGHLIGHTS */
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .highlight-card {
+            background-color: #F8F5EA;
+            border: 2px solid #1F4D3A;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .highlight-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .highlight-card h3 {
+            color: #1F4D3A;
+        }
+
+        .highlight-card p {
+            padding: 0 15px 15px;
+        }
+
+        /* BEST TIME TO VISIT */
+
+        .season-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .season-card {
+            background-color: #F8F5EA;
+            border: 2px solid #1F4D3A;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .season-card h3 {
+            color: #1F4D3A;
+        }
+
+        .recommended {
+            background-color: #D5E2D4;
+        }
+
+        /* ZONE TABLE */
+
+        .table-container {
+            overflow-x: auto;
+            background-color: #F8F5EA;
+            padding: 15px;
+            border: 2px solid #1F4D3A;
+            border-radius: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 600px;
+        }
+
+        th {
+            background-color: #1F4D3A;
+            color: white;
+            padding: 14px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #C9D3C8;
+        }
+
+        tr:nth-child(even) {
+            background-color: #E8EFE5;
+        }
+
+        /* ANIMAL GALLERY */
+
+        .animals {
+            background-color: #D5E2D4;
+            border-radius: 15px;
+        }
+
+        .animal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .animal-card {
+            background-color: #F8F5EA;
+            border: 2px solid #1F4D3A;
+            border-radius: 12px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+        }
+
+        .animal-card h3 {
+            color: #1F4D3A;
+            margin: 8px;
+        }
+
+        /* GLIMPSE GALLERY */
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid #1F4D3A;
+            transition: transform 0.3s;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.04);
+        }
+
+        /* BOOKING BANNER */
+
+        .booking {
+            background:
+            linear-gradient(rgba(31,77,58,0.8),
+            rgba(31,77,58,0.8)),
+            url("images/corbett-banner.jpg");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            padding: 60px 20px;
+        }
+
+        .booking h2 {
+            color: #F0BC5E;
+            font-size: 32px;
+        }
+        .book-btn {
+             background-color: #DDAA43;
+             color: #172C20;
+             text-decoration: none;
+             padding: 12px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            font-weight: bold;
+            transition: 0.3s;
+}
+
+.book-btn:hover {
+    background-color: #F0BC5E;
+    color: white;
+}
+
+        /* FOOTER */
+
+        footer {
+            background-color: #163D2E;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer a {
+            color: #DDAA43;
+            text-decoration: none;
+        }
+
+        /* BACK TO TOP */
+
+        .top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #DDAA43;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media(max-width: 850px) {
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .animal-grid,
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .highlight-grid,
+            .season-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media(max-width: 550px) {
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .animal-grid,
+            .gallery-grid,
+            .highlight-grid,
+            .season-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav a {
+                margin: 4px;
+                font-size: 13px;
+            }
+        }
+
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- NAVIGATION BAR -->
+
+    <nav>
+
+        <h2>VANYA SAFARI</h2>
+
+        <div>
+            <a href="htmlcode.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#zones">Zones</a>
+            <a href="#animals">Animals</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <header class="hero">
+
+        <h1>Jim Corbett National Park</h1>
+
+        <p>
+            Discover the wilderness of Uttarakhand.
+            Explore magnificent forests, beautiful rivers,
+            diverse wildlife and the natural beauty
+            of India's first national park.
+        </p>
+
+        <a href="#about" class="button">
+            Explore the Park
+        </a>
+
+    </header>
+
+
+    <!-- ABOUT THE PARK -->
+
+    <section class="about" id="about">
+
+        <h2 class="section-title">
+            About Jim Corbett National Park
+        </h2>
+
+        <div class="about-content">
+
+            <img src="images/corbet-forest.webp"
+                 alt="Beautiful forest of Jim Corbett">
+
+            <div>
+
+                <h3>A Journey Into the Wilderness</h3>
+
+                <p>
+                    Located in the Nainital district of
+                    Uttarakhand, Jim Corbett National Park
+                    is one of India's most famous wildlife
+                    destinations. Established in 1936,
+                    it holds the distinction of being
+                    India's first national park.
+                </p>
+
+                <p>
+                    Originally named Hailey National Park,
+                    it was later renamed in honour of
+                    Jim Corbett, a well-known hunter,
+                    naturalist and conservationist.
+                </p>
+
+                <p>
+                    The park forms part of the larger
+                    Corbett Tiger Reserve, which protects
+                    an extraordinary variety of wildlife
+                    and natural habitats.
+                </p>
+
+                <p>
+                    With its dense forests, open grasslands,
+                    flowing rivers and picturesque hills,
+                    Corbett provides a remarkable experience
+                    for nature and wildlife enthusiasts.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PARK HIGHLIGHTS -->
+
+    <section>
+
+        <h2 class="section-title">
+            Discover the Beauty of Corbett
+        </h2>
+
+        <div class="highlight-grid">
+
+            <div class="highlight-card">
+
+                <img src="images/ramganga.jpg"
+                     alt="Ramganga River">
+
+                <h3>Ramganga River</h3>
+
+                <p>
+                    The Ramganga River and its reservoir
+                    form important aquatic habitats and
+                    add to the natural beauty of the reserve.
+                </p>
+
+            </div>
+
+
+            <div class="highlight-card">
+
+                <img src="images/forest.jpg"
+                     alt="Sal forest">
+
+                <h3>Dense Forests</h3>
+
+                <p>
+                    Explore extensive Sal forests,
+                    mixed vegetation and natural
+                    woodland habitats.
+                </p>
+
+            </div>
+
+
+            <div class="highlight-card">
+
+                <img src="images/grassland.jpg"
+                     alt="Corbett grassland">
+
+                <h3>Open Grasslands</h3>
+
+                <p>
+                    The grasslands and river valleys
+                    provide important habitats for
+                    many species of wildlife.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BEST TIME TO VISIT -->
+
+    <section id="season">
+
+        <h2 class="section-title">
+            Best Time to Visit Jim Corbett
+        </h2>
+
+        <p>
+            Corbett offers different experiences throughout
+            the year. Your preferred visiting season may
+            depend on weather, landscapes and wildlife
+            viewing opportunities.
+        </p>
+
+        <div class="season-grid">
+
+
+            <div class="season-card recommended">
+
+                <h3>Winter Season</h3>
+
+                <h4>November – February</h4>
+
+                <p>
+                    Winter brings cool weather, pleasant
+                    daytime conditions and beautiful
+                    forest landscapes. It is a good time
+                    for visitors who enjoy comfortable
+                    weather and birdwatching.
+                </p>
+
+                <b>Ideal for:</b>
+                <p>Nature lovers and birdwatchers.</p>
+
+            </div>
+
+
+            <div class="season-card">
+
+                <h3>Summer Season</h3>
+
+                <h4>March – June</h4>
+
+                <p>
+                    Summer brings warmer temperatures.
+                    During hotter periods, some animals
+                    may visit water sources more frequently,
+                    although sightings are never guaranteed.
+                </p>
+
+                <b>Ideal for:</b>
+                <p>Visitors interested in wildlife observation.</p>
+
+            </div>
+
+
+            <div class="season-card">
+
+                <h3>Monsoon Season</h3>
+
+                <h4>July – October</h4>
+
+                <p>
+                    The monsoon transforms the landscape
+                    into a lush green environment. However,
+                    several tourism zones close during this
+                    period because of rainfall and road
+                    conditions.
+                </p>
+
+                <b>Ideal for:</b>
+                <p>Enjoying the surrounding nature where
+                   access is permitted.</p>
+
+            </div>
+
+        </div>
+
+        <p>
+            <b>Visitor note:</b>
+            Tourism-zone opening dates differ.
+            Always check the latest official schedule
+            before planning your safari.
+        </p>
+
+    </section>
+
+
+    <!-- SAFARI ZONES -->
+
+    <section id="zones">
+
+        <h2 class="section-title">
+            Explore the Tourism Zones
+        </h2>
+
+        <p>
+            Corbett Tiger Reserve has several tourism
+            zones, each offering different landscapes
+            and entry arrangements.
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Tourism Zone</th>
+                    <th>Entry Gate</th>
+                    <th>Visiting Period</th>
+                    <th>Nearest City</th>
+                </tr>
+
+                <tr>
+                    <td>Dhikala</td>
+                    <td>Dhangari</td>
+                    <td>15 November – 15 June</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+                <tr>
+                    <td>Bijrani</td>
+                    <td>Amdanda</td>
+                    <td>15 October – 30 June</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+                <tr>
+                    <td>Jhirna</td>
+                    <td>Dhela</td>
+                    <td>Throughout the year*</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+                <tr>
+                    <td>Dhela</td>
+                    <td>Dhela</td>
+                    <td>Throughout the year*</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+                <tr>
+                    <td>Durgadevi</td>
+                    <td>Durgadevi</td>
+                    <td>15 November – 15 June</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+                <tr>
+                    <td>Sonanadi</td>
+                    <td>Vatanvasa</td>
+                    <td>15 November – 15 June</td>
+                    <td>Kotdwar</td>
+                </tr>
+
+                <tr>
+                    <td>Pakhro</td>
+                    <td>Pakhro</td>
+                    <td>15 November – 15 June</td>
+                    <td>Kotdwar</td>
+                </tr>
+
+                <tr>
+                    <td>Garjia</td>
+                    <td>Garjiya</td>
+                    <td>Throughout the year*</td>
+                    <td>Ramnagar</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <p>
+            *Throughout the year is subject to official
+            permissions, weather and safety conditions.
+            Opening dates may change.
+        </p>
+
+    </section>
+
+
+    <!-- ANIMALS SECTION -->
+
+    <section class="animals" id="animals">
+
+        <h2 class="section-title">
+            Animals You Can Spot @ Corbett
+        </h2>
+
+        <p style="text-align:center;">
+            The reserve is home to a diverse range
+            of mammals, reptiles and birds.
+        </p>
+
+        <div class="animal-grid">
+
+
+            <div class="animal-card">
+
+                <img src="/tiger.webp" alt="Tiger">
+
+                <h3> Tiger</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/asianelphant.jpg" alt="Asian Elephant">
+
+                <h3>Asian Elephant</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/leoperd.jpg" alt="Leopard">
+
+                <h3>Leopard</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/chittal.jpg" alt="Chital">
+
+                <h3>Chital</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/sambar.jpg" alt="Sambar Deer">
+
+                <h3>Sambar Deer</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/wildboar.jpg" alt="Wild Boar">
+
+                <h3>Wild Boar</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/gharial.jpg" alt="Gharial">
+
+                <h3>Gharial</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="crocodile.jpg" alt="Mugger Crocodile">
+
+                <h3>Mugger Crocodile</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/jackal.jpg" alt="Jackal">
+
+                <h3>Jackal</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/kingfisher.jpg" alt="Kingfisher">
+
+                <h3>Kingfisher</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/asianparadise.jpg"
+                     alt="Asian Paradise Flycatcher">
+
+                <h3>Asian Paradise Flycatcher</h3>
+
+            </div>
+
+
+            <div class="animal-card">
+
+                <img src="/monitor.jpg"
+                     alt="Monitor Lizard">
+
+                <h3>Monitor Lizard</h3>
+
+            </div>
+
+        </div>
+
+        <p>
+            Corbett is also home to many other species
+            of mammals, reptiles and more than 580
+            recorded bird species. Actual sightings
+            depend on season, habitat and natural conditions.
+        </p>
+
+    </section>
+
+
+    <!-- GLIMPSE GALLERY -->
+
+    <section id="gallery">
+
+        <h2 class="section-title">
+            Glimpse @ Corbett
+        </h2>
+
+        <p style="text-align:center;">
+            A collection of beautiful landscapes,
+            wildlife and memorable moments from
+            Jim Corbett National Park.
+        </p>
+
+        <div class="gallery-grid">
+
+            <img src="images/landscape.jpg"
+                 alt="Corbett forest landscape">
+
+            <img src="images/river landscape.jpg"
+                 alt="River landscape">
+
+            <img src="images/tiger.webp"
+                 alt="Tiger in Corbett">
+
+            <img src="images/elephant in forest.jpg"
+                 alt="Elephants in the forest">
+
+            <img src="images/safari.jpg"
+                 alt="Forest safari">
+
+            <img src="images/grassland.jpg"
+                 alt="Corbett grasslands">
+
+            <img src="images/bird.jpg"
+                 alt="Birds of Corbett">
+
+            <img src="images/mouintain.jpg"
+                 alt="Beautiful mountain scenery">
+
+        </div>
+
+    </section>
+
+
+    <!-- BOOKING / PERMIT SECTION -->
+
+    <section>
+
+        <div class="booking">
+
+            <h2>Plan Your Visit to Corbett</h2>
+
+            <p>
+                Experience the beauty of the wilderness
+                and plan your journey to one of India's
+                most remarkable wildlife destinations.
+            </p>
+
+            <p>
+                Check official permit availability,
+                safari timings and visitor information
+                before your visit.
+            </p>
+            <a href="booking.html" class="book-btn">Book Now</a>
+
+            
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h2>VANYA SAFARI</h2>
+
+        <p>
+            Experience Nature. Explore Wildlife.
+            Create Memories.
+        </p>
+
+        <p>
+            <a href="htmlcode.html">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#zones">Zones</a> |
+            <a href="#gallery">Gallery</a>
+        </p>
+
+        <p>
+            &copy; 2026 Vanya Safari.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- BACK TO TOP BUTTON -->
+
+    <a href="#top" class="top">↑</a>
+
+</body>
+</html>

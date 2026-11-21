@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandhavgarh National Park | Vanya Safari</title>
+
+    <style>
+
+        /* GENERAL SETTINGS */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #E8EFE5; color: #26352D; line-height: 1.7; }
+
+        /* NAVIGATION BAR */
+        nav { background-color: #1F4D3A; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        nav h2 { color: #DDAA43; margin: 0; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        nav a:hover { color: #DDAA43; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url("images/bandhavgarh/hero.jpg");
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 25px;
+        }
+        .hero h1 { font-size: 48px; color: #F0BC5E; }
+        .hero p { font-size: 19px; max-width: 750px; }
+        .button { display: inline-block; background-color: #DDAA43; color: #172C20; padding: 12px 25px; border-radius: 7px; text-decoration: none; font-weight: bold; }
+        .button:hover { background-color: #F0BC5E; }
+
+        /* COMMON SECTION SETTINGS */
+        section { padding: 40px 6%; margin: 15px auto; }
+        .section-title { text-align: center; color: #1F4D3A; font-size: 30px; margin-bottom: 25px; }
+
+        /* ABOUT SECTION */
+        .about { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 15px; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .about-content img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; border: 4px solid #1F4D3A; }
+
+        /* PARK HIGHLIGHTS */
+        .highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .highlight-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .highlight-card img { width: 100%; height: 190px; object-fit: cover; }
+        .highlight-card h3 { color: #1F4D3A; }
+        .highlight-card p { padding: 0 15px 15px; }
+
+        /* BEST TIME TO VISIT */
+        .season-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .season-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; padding: 20px; }
+        .season-card h3 { color: #1F4D3A; }
+        .recommended { background-color: #D5E2D4; }
+
+        /* ZONE TABLE */
+        .table-container { overflow-x: auto; background-color: #F8F5EA; padding: 15px; border: 2px solid #1F4D3A; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        th { background-color: #1F4D3A; color: white; padding: 14px; }
+        td { padding: 13px; border-bottom: 1px solid #C9D3C8; }
+        tr:nth-child(even) { background-color: #E8EFE5; }
+
+        /* ANIMAL GALLERY */
+        .animals { background-color: #D5E2D4; border-radius: 15px; }
+        .animal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .animal-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .animal-card img { width: 100%; height: 170px; object-fit: cover; }
+        .animal-card h3 { color: #1F4D3A; margin: 8px; }
+
+        /* GLIMPSE GALLERY */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .gallery-grid img { width: 100%; height: 190px; object-fit: cover; border-radius: 12px; border: 3px solid #1F4D3A; transition: transform 0.3s; }
+        .gallery-grid img:hover { transform: scale(1.04); }
+
+        /* BOOKING BANNER */
+        .booking {
+            background: linear-gradient(rgba(31,77,58,0.8), rgba(31,77,58,0.8)), url("images/bandhavgarh/banner.jpg");
+            background-size: cover; background-position: center;
+            color: white; text-align: center; border-radius: 15px; padding: 60px 20px;
+        }
+        .booking h2 { color: #F0BC5E; font-size: 32px; }
+        .book-btn { background-color: #DDAA43; color: #172C20; text-decoration: none; padding: 12px 25px; border-radius: 10px; display: inline-block; font-weight: bold; transition: 0.3s; }
+        .book-btn:hover { background-color: #F0BC5E; color: white; }
+
+        /* FOOTER */
+        footer { background-color: #163D2E; color: white; text-align: center; padding: 30px; }
+        footer a { color: #DDAA43; text-decoration: none; }
+
+        /* BACK TO TOP */
+        .top { position: fixed; bottom: 20px; right: 20px; background-color: #DDAA43; color: black; padding: 10px 15px; border-radius: 50%; text-decoration: none; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            .about-content { grid-template-columns: 1fr; }
+            .animal-grid, .gallery-grid, .highlight-grid, .season-grid { grid-template-columns: 1fr 1fr; }
+            nav { flex-wrap: wrap; gap: 10px; }
+        }
+        @media (max-width: 550px) {
+            .hero h1 { font-size: 32px; }
+            nav a { margin: 4px; font-size: 13px; }
+        }
+
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <h2>VANYA SAFARI</h2>
+        <div>
+            <a href="htmlcode.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#zones">Zones</a>
+            <a href="#animals">Animals</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1>Bandhavgarh National Park</h1>
+        <p>
+            Discover the kingdom of tigers in the heart of Madhya Pradesh. Explore sal forests, open meadows, ancient caves and a hilltop fort.
+        </p>
+        <a href="#about" class="button">Explore the Park</a>
+    </header>
+
+
+    <!-- ABOUT THE PARK -->
+    <section class="about" id="about">
+
+        <h2 class="section-title">About Bandhavgarh National Park</h2>
+
+        <div class="about-content">
+
+            <img src="images2/bandhabgarh.jpg" alt="Bandhavgarh fort above the forest">
+
+            <div>
+                <h3>Kingdom of Tigers</h3>
+
+                <p>
+                    Bandhavgarh lies in the eastern Satpura hills of Madhya Pradesh. It is renowned for having one of the highest tiger densities in India, set around an ancient hilltop fort.
+                </p>
+
+                <p>
+                    Its name comes from a legend of the Ramayana. It is believed that Lord Rama gave the fort to his brother Lakshman, so Bandhavgarh means “brother’s fort”.
+                </p>
+
+                <p>
+                    Notified as a national park in 1968, it forms the heart of the Bandhavgarh Tiger Reserve. Tala, Magdhi and Khitauli are the core zones, while Dhamokhar, Johila and Panpatha are the buffer zones.
+                </p>
+
+                <p>
+                    Dense forests, grasslands and perennial streams provide ideal habitat, and the reserve records more than 47 kinds of mammals and more than 250 bird species.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PARK HIGHLIGHTS -->
+    <section>
+
+        <h2 class="section-title">Discover the Beauty of Bandhavgarh</h2>
+
+        <div class="highlight-grid">
+
+            <div class="highlight-card">
+                <img src="images2/bfort.jpg" alt="Bandhavgarh Fort">
+                <h3>Bandhavgarh Fort</h3>
+                <p>
+                    A historic fort stands on a hill above the forest, giving the park its name and a dramatic setting for wildlife.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images2/bcaves.jpg" alt="Ancient caves and statues">
+                <h3>Caves and Ancient Statues</h3>
+                <p>
+                    Ancient caves and old statues, especially around the Tala zone, add history to your safari.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images2/bforestmeadows.jpg" alt="Sal forest and meadows">
+                <h3>Sal Forests and Meadows</h3>
+                <p>
+                    Sal and bamboo forests, open grasslands and streams create varied habitats for many species.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BEST TIME TO VISIT -->
+    <section id="season">
+
+        <h2 class="section-title">Best Time to Visit Bandhavgarh</h2>
+
+        <p>
+            Bandhavgarh’s safari season runs for most of the year apart from the monsoon. Your best time depends on the weather and what you hope to see.
+        </p>
+
+        <div class="season-grid">
+
+            <div class="season-card recommended">
+                <h3>Winter Season</h3>
+                <h4>October – February</h4>
+                <p>
+                    The park reopens in mid-October after the monsoon. Mornings are cool and the forest is fresh and green.
+                </p>
+                <b>Ideal for:</b>
+                <p>Families, photographers and first-time visitors.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Summer Season</h3>
+                <h4>March – June</h4>
+                <p>
+                    Summer is hot, and animals often visit waterholes more frequently, although sightings are never guaranteed.
+                </p>
+                <b>Ideal for:</b>
+                <p>Visitors focused on wildlife observation.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Monsoon Season</h3>
+                <h4>July – September</h4>
+                <p>
+                    Heavy rain turns the forest green, but safari access is restricted during these months.
+                </p>
+                <b>Ideal for:</b>
+                <p>Planning ahead for the next season.</p>
+            </div>
+
+        </div>
+
+        <p>
+            <b>Visitor note:</b>
+            The reserve’s official website gives mid-October to mid-June as the best time to visit. Zone opening dates and safari timings can change, so check the latest official schedule before planning your safari.
+        </p>
+
+    </section>
+
+
+    <!-- SAFARI ZONES -->
+    <section id="zones">
+
+        <h2 class="section-title">Explore the Tourism Zones</h2>
+
+        <p>
+            Bandhavgarh has three core tourism zones and three buffer zones. Each offers a different landscape and a different safari experience.
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Tourism Zone</th>
+                    <th>Type</th>
+                    <th>Known For</th>
+                    <th>Visiting Period</th>
+                </tr>
+
+                <tr>
+                    <td>Tala</td>
+                    <td>Core</td>
+                    <td>The oldest and most famous zone, with striking topography, ancient caves, statues and high tiger visibility</td>
+                    <td>Mid-October to mid-June*</td>
+                </tr>
+
+                <tr>
+                    <td>Magdhi</td>
+                    <td>Core</td>
+                    <td>Bamboo thickets and open grasslands, highly productive for tracking big cats</td>
+                    <td>Mid-October to mid-June*</td>
+                </tr>
+
+                <tr>
+                    <td>Khitauli</td>
+                    <td>Core</td>
+                    <td>Varied habitats from bamboo to grassland, good for big-cat tracking</td>
+                    <td>Mid-October to mid-June*</td>
+                </tr>
+
+                <tr>
+                    <td>Dhamokhar, Panpatha and Johila</td>
+                    <td>Buffer</td>
+                    <td>Peripheral forests and animal corridors with sal and bamboo, lower vehicle density, leopards, dholes and herbivores</td>
+                    <td>Mid-October to mid-June*</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <p>
+            *Dates are subject to official permissions, weather and safety conditions, and may change. Confirm on the official safari booking portal.
+        </p>
+
+    </section>
+
+
+    <!-- ANIMALS SECTION -->
+    <section class="animals" id="animals">
+
+        <h2 class="section-title">Animals You Can Spot @ Bandhavgarh</h2>
+
+        <p style="text-align:center;">
+            The official reserve website lists these prominent mammals, and the reserve is also home to snakes and lizards.
+        </p>
+
+        <div class="animal-grid">
+
+            <div class="animal-card">
+                <img src="/tiger.webp" alt="Royal Bengal Tiger">
+                <h3>Royal Bengal Tiger</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/leoperd.jpg" alt="Leopard">
+                <h3>Leopard</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/dhole.webp" alt="Dhole (Wild Dog)">
+                <h3>Dhole (Wild Dog)</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/hyena.jpg" alt="Striped Hyena">
+                <h3>Striped Hyena</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/infianwolf.jpg" alt="Indian Wolf">
+                <h3>Indian Wolf</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="jackal.jpg" alt="Jackal">
+                <h3>Jackal</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/slothbear.jpg" alt="Sloth Bear">
+                <h3>Sloth Bear</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/gaur.jpg" alt="Gaur">
+                <h3>Gaur</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="chittal.jpg" alt="Chital">
+                <h3>Chital</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="sambar.jpg" alt="Sambar Deer">
+                <h3>Sambar Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/barkingdear.jpg" alt="Barking Deer">
+                <h3>Barking Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/antelope.jpg" alt="Chousingha (Four-horned Antelope)">
+                <h3>Chousingha (Four-horned Antelope)</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/Nilgai.webp" alt="Nilgai">
+                <h3>Nilgai</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/chinkara.jpg" alt="Chinkara">
+                <h3>Chinkara</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="wildboar.jpg" alt="Wild Boar">
+                <h3>Wild Boar</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images3/langoor.jpg" alt="Common Langur">
+                <h3>Common Langur</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/Rhesus_macaque.jpg" alt="Rhesus Macaque">
+                <h3>Rhesus Macaque</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images2/rockpython.jpg" alt="Indian Rock Python">
+                <h3>Indian Rock Python</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/indiancobra.jpg" alt="Indian Cobra">
+                <h3>Indian Cobra</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="monitor.jpg" alt="Bengal Monitor Lizard">
+                <h3>Bengal Monitor Lizard</h3>
+            </div>
+
+        </div>
+
+        <p>
+            The reserve records more than 47 kinds of mammals, more than 250 bird species and over 100 butterfly species. Actual sightings depend on season, zone and natural conditions.
+        </p>
+
+    </section>
+
+
+    <!-- GLIMPSE GALLERY -->
+    <section id="gallery">
+
+        <h2 class="section-title">Glimpse @ Bandhavgarh</h2>
+
+        <p style="text-align:center;">
+            Landscapes, wildlife and memorable moments from Bandhavgarh National Park.
+        </p>
+
+        <div class="gallery-grid">
+            <img src="images2/bandhabgarh.jpg" alt="Bandhavgarh landscape">
+            <img src="images2/Bandhavgarh-Fort.webp" alt="Fort above the forest">
+            <img src="images2/tiger in bandhabgarh.jpg" alt="Tiger in Bandhavgarh">
+            <img src="images2/bancientacve.jpg" alt="Ancient caves">
+            <img src="images2/b.safari.jpg" alt="Jeep safari">
+            <img src="images2/images (1).jpg" alt="Open meadows">
+            <img src="images2/images.jpg" alt="Birds of Bandhavgarh">
+            <img src="images2/fortabove.jpg" alt="Sunrise over the forest">
+        </div>
+
+    </section>
+
+
+    <!-- BOOKING / PERMIT SECTION -->
+    <section>
+
+        <div class="booking">
+
+            <h2>Plan Your Visit to Bandhavgarh</h2>
+
+            <p>
+                Experience the wilderness of Madhya Pradesh and plan your journey to the kingdom of tigers.
+            </p>
+
+            <p>
+                Check official permit availability, safari timings and
+                visitor information before your visit.
+            </p>
+
+            <a href="booking.html" class="book-btn">Book Now</a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>VANYA SAFARI</h2>
+
+        <p>Experience Nature. Explore Wildlife. Create Memories.</p>
+
+        <p>
+            <a href="htmlcode.html">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#zones">Zones</a> |
+            <a href="#gallery">Gallery</a>
+        </p>
+
+        <p>&copy; 2026 Vanya Safari. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <!-- BACK TO TOP BUTTON -->
+    <a href="#top" class="top">↑</a>
+
+</body>
+</html>

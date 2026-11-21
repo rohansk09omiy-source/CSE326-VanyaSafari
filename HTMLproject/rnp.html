@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranthambore National Park | Vanya Safari</title>
+
+    <style>
+
+        /* GENERAL SETTINGS */
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #E8EFE5; color: #26352D; line-height: 1.7; }
+
+        /* NAVIGATION BAR */
+        nav { background-color: #1F4D3A; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        nav h2 { color: #DDAA43; margin: 0; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        nav a:hover { color: #DDAA43; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url("images/ranthambore/hero.jpg");
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 25px;
+        }
+        .hero h1 { font-size: 48px; color: #F0BC5E; }
+        .hero p { font-size: 19px; max-width: 750px; }
+        .button { display: inline-block; background-color: #DDAA43; color: #172C20; padding: 12px 25px; border-radius: 7px; text-decoration: none; font-weight: bold; }
+        .button:hover { background-color: #F0BC5E; }
+
+        /* COMMON SECTION SETTINGS */
+        section { padding: 40px 6%; margin: 15px auto; }
+        .section-title { text-align: center; color: #1F4D3A; font-size: 30px; margin-bottom: 25px; }
+
+        /* ABOUT SECTION */
+        .about { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 15px; }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; }
+        .about-content img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; border: 4px solid #1F4D3A; }
+
+        /* PARK HIGHLIGHTS */
+        .highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .highlight-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .highlight-card img { width: 100%; height: 190px; object-fit: cover; }
+        .highlight-card h3 { color: #1F4D3A; }
+        .highlight-card p { padding: 0 15px 15px; }
+
+        /* BEST TIME TO VISIT */
+        .season-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .season-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; padding: 20px; }
+        .season-card h3 { color: #1F4D3A; }
+        .recommended { background-color: #D5E2D4; }
+
+        /* ZONE TABLE */
+        .table-container { overflow-x: auto; background-color: #F8F5EA; padding: 15px; border: 2px solid #1F4D3A; border-radius: 12px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 600px; }
+        th { background-color: #1F4D3A; color: white; padding: 14px; }
+        td { padding: 13px; border-bottom: 1px solid #C9D3C8; }
+        tr:nth-child(even) { background-color: #E8EFE5; }
+
+        /* ANIMAL GALLERY */
+        .animals { background-color: #D5E2D4; border-radius: 15px; }
+        .animal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .animal-card { background-color: #F8F5EA; border: 2px solid #1F4D3A; border-radius: 12px; overflow: hidden; text-align: center; }
+        .animal-card img { width: 100%; height: 170px; object-fit: cover; }
+        .animal-card h3 { color: #1F4D3A; margin: 8px; }
+
+        /* GLIMPSE GALLERY */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .gallery-grid img { width: 100%; height: 190px; object-fit: cover; border-radius: 12px; border: 3px solid #1F4D3A; transition: transform 0.3s; }
+        .gallery-grid img:hover { transform: scale(1.04); }
+
+        /* BOOKING BANNER */
+        .booking {
+            background: linear-gradient(rgba(31,77,58,0.8), rgba(31,77,58,0.8)), url("images/ranthambore/banner.jpg");
+            background-size: cover; background-position: center;
+            color: white; text-align: center; border-radius: 15px; padding: 60px 20px;
+        }
+        .booking h2 { color: #F0BC5E; font-size: 32px; }
+        .book-btn { background-color: #DDAA43; color: #172C20; text-decoration: none; padding: 12px 25px; border-radius: 10px; display: inline-block; font-weight: bold; transition: 0.3s; }
+        .book-btn:hover { background-color: #F0BC5E; color: white; }
+
+        /* FOOTER */
+        footer { background-color: #163D2E; color: white; text-align: center; padding: 30px; }
+        footer a { color: #DDAA43; text-decoration: none; }
+
+        /* BACK TO TOP */
+        .top { position: fixed; bottom: 20px; right: 20px; background-color: #DDAA43; color: black; padding: 10px 15px; border-radius: 50%; text-decoration: none; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            .about-content { grid-template-columns: 1fr; }
+            .animal-grid, .gallery-grid, .highlight-grid, .season-grid { grid-template-columns: 1fr 1fr; }
+            nav { flex-wrap: wrap; gap: 10px; }
+        }
+        @media (max-width: 550px) {
+            .hero h1 { font-size: 32px; }
+            nav a { margin: 4px; font-size: 13px; }
+        }
+
+    </style>
+</head>
+
+<body id="top">
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <h2>VANYA SAFARI</h2>
+        <div>
+            <a href="htmlcode.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#zones">Zones</a>
+            <a href="#animals">Animals</a>
+            <a href="#gallery">Gallery</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h1>Ranthambore National Park</h1>
+        <p>
+            Discover the wild heart of Rajasthan. Explore ancient fort ruins,
+            quiet lakes and dry forests where the Royal Bengal Tiger
+            is often seen in daylight.
+        </p>
+        <a href="#about" class="button">Explore the Park</a>
+    </header>
+
+
+    <!-- ABOUT THE PARK -->
+    <section class="about" id="about">
+
+        <h2 class="section-title">About Ranthambore National Park</h2>
+
+        <div class="about-content">
+
+            <img src="images1/ranthambore.jpg" alt="Ranthambore landscape with fort and forest">
+
+            <div>
+                <h3>Where Tigers Meet Ancient Ruins</h3>
+
+                <p>
+                    Located in the Sawai Madhopur district of Rajasthan,
+                    Ranthambore National Park is one of India’s most famous
+                    tiger reserves. It is known for rocky hills, dry deciduous
+                    forest and some of the best chances in the country of
+                    seeing a tiger in the open.
+                </p>
+
+                <p>
+                    The park’s backdrop is a historic hilltop fort, with ruins,
+                    temples and old stone structures scattered through the forest
+                    and along the edges of its lakes.
+                </p>
+
+                <p>
+                    Ranthambore is a Project Tiger reserve. Its safari area is
+                    divided into ten zones: Zones 1 to 5 form the core, and
+                    Zones 6 to 10 are the quieter buffer zones.
+                </p>
+
+                <p>
+                    From tigers and leopards to sloth bears, striped hyenas and
+                    many birds, Ranthambore offers a memorable wildlife
+                    experience in a truly dramatic setting.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PARK HIGHLIGHTS -->
+    <section>
+
+        <h2 class="section-title">Discover the Beauty of Ranthambore</h2>
+
+        <div class="highlight-grid">
+
+            <div class="highlight-card">
+                <img src="images1/fort.jpg" alt="Ranthambore Fort">
+                <h3>Ranthambore Fort</h3>
+                <p>
+                    An ancient fort stands above the forest, and its ruins,
+                    gateways and temples give the park a unique historic setting.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images1/lake.jpg" alt="Padam Talao lake">
+                <h3>Historic Lakes</h3>
+                <p>
+                    Lakes such as Padam Talao and Rajbagh Talao attract wildlife
+                    and reflect the old ruins along their shores.
+                </p>
+            </div>
+
+            <div class="highlight-card">
+                <img src="images1/rockyhills.jpg" alt="Dry deciduous forest">
+                <h3>Forest and Rocky Hills</h3>
+                <p>
+                    Dry deciduous forest, open meadows and rugged hills create
+                    varied habitats for many species.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- BEST TIME TO VISIT -->
+    <section id="season">
+
+        <h2 class="section-title">Best Time to Visit Ranthambore</h2>
+
+        <p>
+            Ranthambore changes through the year. Your best season depends on
+            the weather, the scenery and the kind of wildlife experience you want.
+        </p>
+
+        <div class="season-grid">
+
+            <div class="season-card recommended">
+                <h3>Winter Season</h3>
+                <h4>October – February</h4>
+                <p>
+                    The park reopens after the monsoon, with fresh greenery in
+                    October and cool, comfortable mornings through winter.
+                    Layered clothing helps on early safaris.
+                </p>
+                <b>Ideal for:</b>
+                <p>Families, photographers and first-time visitors.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Summer Season</h3>
+                <h4>March – June</h4>
+                <p>
+                    Summer is hot, and animals often visit lakes and water
+                    sources more frequently, although sightings are never
+                    guaranteed.
+                </p>
+                <b>Ideal for:</b>
+                <p>Visitors focused on wildlife observation.</p>
+            </div>
+
+            <div class="season-card">
+                <h3>Monsoon Season</h3>
+                <h4>July – September</h4>
+                <p>
+                    The forest turns green, but the core zones close during
+                    these months. Buffer zones may operate, depending on
+                    weather and forest conditions.
+                </p>
+                <b>Ideal for:</b>
+                <p>Quiet landscapes where access is allowed.</p>
+            </div>
+
+        </div>
+
+        <p>
+            <b>Visitor note:</b>
+            Zone opening dates and safari timings change by season.
+            Always check the latest official schedule before planning your safari.
+        </p>
+
+    </section>
+
+
+    <!-- SAFARI ZONES -->
+    <section id="zones">
+
+        <h2 class="section-title">Explore the Safari Zones</h2>
+
+        <p>
+            Ranthambore has ten safari zones. Each safari is assigned to a
+            particular zone, so it helps to know what each one offers.
+        </p>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+                    <th>Safari Zone</th>
+                    <th>Type</th>
+                    <th>Known For</th>
+                    <th>Visiting Period</th>
+                </tr>
+
+                <tr>
+                    <td>Zone 1</td>
+                    <td>Core</td>
+                    <td>Lake scenery and historic ruins</td>
+                    <td>October – June*</td>
+                </tr>
+
+                <tr>
+                    <td>Zone 3</td>
+                    <td>Core</td>
+                    <td>Lake scenery, ruins and frequent tiger sightings</td>
+                    <td>October – June*</td>
+                </tr>
+
+                <tr>
+                    <td>Zones 2, 4 and 5</td>
+                    <td>Core</td>
+                    <td>Lakes, rocky terrain and high tiger density</td>
+                    <td>October – June*</td>
+                </tr>
+
+                <tr>
+                    <td>Zones 6 to 10</td>
+                    <td>Buffer</td>
+                    <td>Wider forest tracks, open meadows, leopards, striped hyenas, sloth bears and birds</td>
+                    <td>Buffer zones may open in monsoon*</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <p>
+            *Dates are subject to official permissions, weather and safety
+            conditions, and may change. Confirm on the official booking portal.
+        </p>
+
+    </section>
+
+
+    <!-- ANIMALS SECTION -->
+    <section class="animals" id="animals">
+
+        <h2 class="section-title">Animals You Can Spot @ Ranthambore</h2>
+
+        <p style="text-align:center;">
+            The park is home to big cats, deer, small carnivores, reptiles and many birds.
+        </p>
+
+        <div class="animal-grid">
+
+            <div class="animal-card">
+                <img src="tiger.webp" alt="Royal Bengal Tiger">
+                <h3>Royal Bengal Tiger</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="leoperd.jpg" alt="Leopard">
+                <h3>Leopard</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/caracal.jpg" alt="Caracal">
+                <h3>Caracal</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/junglecat.jpg" alt="Jungle Cat">
+                <h3>Jungle Cat</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/hyena.jpg" alt="Striped Hyena">
+                <h3>Striped Hyena</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/slothbear.jpg" alt="Sloth Bear">
+                <h3>Sloth Bear</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="sambar.jpg" alt="Sambar Deer">
+                <h3>Sambar Deer</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="chittal.jpg" alt="Chital">
+                <h3>Chital</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/chinkara.jpg" alt="Chinkara">
+                <h3>Chinkara</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="wildboar.jpg" alt="Wild Boar">
+                <h3>Wild Boar</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/indianfox.jpg" alt="Indian Fox">
+                <h3>Indian Fox</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="jackal.jpg" alt="Jackal">
+                <h3>Jackal</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/crocodile.jpg" alt="Mugger Crocodile">
+                <h3>Mugger Crocodile</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/indianpython.jpg" alt="Indian Python">
+                <h3>Indian Python</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="/monitor.jpg" alt="Monitor Lizard">
+                <h3>Monitor Lizard</h3>
+            </div>
+
+            <div class="animal-card">
+                <img src="images1/indiancobra.jpg" alt="Indian Cobra">
+                <h3>Indian Cobra</h3>
+            </div>
+
+        </div>
+
+        <p>
+            Ranthambore is also home to many other mammals, reptiles and
+            more than 300 bird species. Actual sightings depend on the
+            season, the zone and natural conditions.
+        </p>
+
+    </section>
+
+
+    <!-- GLIMPSE GALLERY -->
+    <section id="gallery">
+
+        <h2 class="section-title">Glimpse @ Ranthambore</h2>
+
+        <p style="text-align:center;">
+            Landscapes, wildlife and memorable moments from
+            Ranthambore National Park.
+        </p>
+
+        <div class="gallery-grid">
+            <img src="images1/rlandsacpe.jpg"Ranthambore landscape">
+            <img src="images1/rfortruins.jpg" alt="Fort ruins above the forest">
+            <img src="images1/tiger in ranthambore.jpg" alt="Tiger in Ranthambore">
+            <img src="images1/rlake.jpg" alt="Lake at sunrise">
+            <img src="images1/rsafari.jpg" alt="Safari jeep in the forest">
+            <img src="images1/rleopard.jpg" alt="Leopard on a rock">
+            <img src="images1/rbird.jpg" alt="Birds of Ranthambore">
+            <img src="images1/rhills.jpg" alt="Rocky hills">
+        </div>
+
+    </section>
+
+
+    <!-- BOOKING / PERMIT SECTION -->
+    <section>
+
+        <div class="booking">
+
+            <h2>Plan Your Visit to Ranthambore</h2>
+
+            <p>
+                Experience the wilderness of Rajasthan and plan your journey
+                to one of India’s most remarkable tiger reserves.
+            </p>
+
+            <p>
+                Check official permit availability, safari timings and
+                visitor information before your visit.
+            </p>
+
+            <a href="booking.html" class="book-btn">Book Now</a>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h2>VANYA SAFARI</h2>
+
+        <p>Experience Nature. Explore Wildlife. Create Memories.</p>
+
+        <p>
+            <a href="htmlcode.html">Home</a> |
+            <a href="#about">About</a> |
+            <a href="#zones">Zones</a> |
+            <a href="#gallery">Gallery</a>
+        </p>
+
+        <p>&copy; 2026 Vanya Safari. All Rights Reserved.</p>
+
+    </footer>
+
+
+    <!-- BACK TO TOP BUTTON -->
+    <a href="#top" class="top">↑</a>
+
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANYA SAFARI</title>
+    <style>
+     body{
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    background-color: #F5F0E1;
+    color: #1F2A24;
+    
+}
+#heading{
+    text-align: center;
+    color: blanchedalmond;
+    background-color:#1F4D3A;
+    font-family:Arial, Helvetica, sans-serif;
+    padding:10px;
+}
+#heading h1{
+    margin: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+#navbar{
+    background-color: #173B2C;
+    position: sticky;
+    top: 0;
+    z-index:1000;
+    box-shadow:0 2px 6px rgba(0,0,0,0.25);
+}
+#navbar ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    position:relative;
+}
+#navbar a{
+    display: block;
+    padding: 14px 22px;
+    color: #F5F0E1;
+    text-decoration: none;
+    font-size:15px;
+    letter-spacing: 0.5px;
+    border-bottom:3ps solid transparent;
+}
+#navbar a:hover{
+    background-color: #D9A441;
+    color: #1B1B1B;border-bottom-color: #D9A441;
+}
+#navbar .totop{
+    margin-left: auto;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#navbar .totop a{
+    padding: 8px 16px;
+    background-color: #D9A441;
+    color: #1B1B1B;
+    border-radius: 20px;
+    border-bottom: none;
+    font-weight: 600;
+}
+#navbar .totop a:hover{
+    background-color: #F0BC5E;
+    color: #1B1B1B;
+}
+@media (max-width: 700px){
+    #navbar .totop{
+        position: static;
+        transform: none;
+    }}
+#welcome{
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+#welcome h2{
+    margin: 0 0 10px;
+    color: #1F4D3A;
+}
+#welcome p{
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 600;
+}
+footer{
+    margin-top: auto;
+    background-color: #173B2C;
+    color: #F5F0E1;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+footer h2,h3{
+    margin: 0 0 10px;
+    color: #D9A441;
+}
+footer p{
+    margin: 6px 0;
+}
+footer a{
+    color: #F5F0E1;
+}
+footer a:hover{
+    color: #D9A441;
+}
+#gallery{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr ;
+    gap:15px;
+    margin:20px;
+    padding:10px;
+    border:black solid ;
+    border-radius: 20px;
+}
+.gallery{
+    border: #1F4D3A solid;
+    border-radius: 15px;
+    padding:10px;
+    background-color: #1F4D3A;
+    color: antiquewhite;
+    display:flex;
+    flex-direction: column;
+}
+.gallery a {
+    margin-top: auto;
+}
+#images{
+    border:transparent ;
+    padding:15px;
+    gap: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+#jcnp,#bnp,#rnp,#knp{
+     display: block;
+    padding: 14px 22px;
+    color: #faf5f5;
+    text-decoration: none;
+    font-size:15px;
+    letter-spacing: 0.5px;
+    border-bottom:3ps solid transparent;
+    border-radius: 10px;
+    background-color:#D9A441;
+    
+}
+#jcnp {
+    text-decoration: none;
+}
+#jcnp:hover{
+    background-color: #F0BC5E;
+}
+#knp {
+    text-decoration: none;
+}
+#knp:hover{
+    background-color: #F0BC5E;
+}
+#bnp {
+    text-decoration: none;
+}
+#bp:hover{
+    background-color: #F0BC5E;
+}
+#rnp {
+    text-decoration: none;
+}
+#rnp:hover{
+    background-color: #F0BC5E;
+}
+#services{
+    margin-left:15px;
+    margin-right: 10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+    border:2px solid #1F2A24;
+    border-radius:15px;
+    padding:20px;
+    background-color: #E8EFE5;
+
+}
+.services{
+    border: 5px solid  #1F2A24;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding:10px;
+    color: rgb(13, 8, 1);
+    background-color: antiquewhite;
+
+
+}
+
+#journey {
+    margin: 30px 20px;
+    padding: 35px;
+    background-color: #1F4D3A;
+    color: #F5F0E1;
+    border-radius: 15px;
+    text-align: center;
+}
+
+#journey img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+
+#journey h2 {
+    color: #D9A441;
+    font-size: 28px;
+}
+
+#journey p {
+    max-width: 900px;
+    margin: auto;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <div id="heading">
+        <h1>BOOK YOUR SAFARI</h1>
+    </div>
+    <nav id="navbar">
+        <ul>
+            <li><a href="#gallery">Parks</a></li>
+            <li><a href="/maps.html">Zone Maps</a></li>
+            <li><a href="/booking.html">Book Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="totop"><a href="#heading">&#8593; Back to top</a></li>
+
+        </ul>
+    </nav>
+    <section id="welcome">
+    <h2>Welcome to Vanya Safari</h2>
+    <p>Step into the wild. Choose your park and let the jungle surprise you.</p>
+    </section>
+    <div>
+    <h style="font-weight: 700; margin-left: 20px;">Why choose a jungle safari?</h>
+    <p style="font-weight: 500;margin-left:30px">A jungle safari takes you out of everyday life and into a world that runs on its own rhythm. You set out at dawn, when the forest is cool and quiet, and every turn of the trail holds a surprise: a tiger stepping out of the tall grass, a rhino grazing at the water’s edge, or a herd of elephants crossing your path. These moments can’t be planned or repeated, which is why they stay with you for years. You’ll hear the forest wake up, breathe fresh air far from the city, and learn how much life depends on a single waterhole. You’ll come home with photographs, but also with stories you’ll tell again and again and a deeper respect for nature. A safari isn’t only a trip. It’s an experience that changes how you see the wild.
+      Step out at sunrise and let the wild surprise you. A tiger in the grass, a rhino by the water, the forest waking up around you are memories you’ll carry for a lifetime.</p>
+    </div>
+    <div id="images">
+        <div><image src="/download.jpg"  style="height: 200px; width: 200px;"></image></div>
+        <div><image src="/download1.jpg" style="height: 200px; width: 200px;"></image></div>
+        <div><image src="/download3.jpg" style="height: 200px; width: 200px;"></image></div>
+        <div><image src="/download2.jpg" style="height: 200px; width: 200px;"></image></div>
+        <div><image src="/download4.jpg" style="height: 200px; width: 200px;"></image></div>
+
+    </div>
+    <h3 style="margin-left: 10px; color: #173B2C;"><u>PARKS:</u></h3>
+    <div id="gallery">
+        <div class="gallery">
+            <h>1.Jim Corbett National Park (Uttarakhand):</h>
+            <p>India’s first national park, established in 1936, Corbett spreads across rolling hills, sal forests and river valleys. Its zones, from the grassland-rich Dhikala to the tiger country of Bijrani and Dhela, offer sightings of tigers, elephants and many birds.</p>
+            <a href="/jcnp.html" id="jcnp"><span>Explore more </span></a>
+        </div>
+        <div class="gallery">
+            <h>2.Ranthambore National Park (Rajasthan):</h>
+            <p>Ranthambore is famous for its fort ruins, ancient lakes and dry deciduous forest, where the Royal Bengal Tiger is often seen in daylight. Zones 1 to 5 form the core, while the quieter zones 6 to 10 are good for leopards, hyenas and birds.</p>
+             <a href="/rnp.html" id="rnp"><span >Explore more </span></a>
+        </div>
+        <div class="gallery">
+            <h>3.Kaziranga National Park (Assam)</h>
+            <p>A UNESCO World Heritage Site on the Brahmaputra floodplain, Kaziranga is home to the world’s largest population of the Great Indian One-Horned Rhinoceros. Its ranges, Kohora, Bagori, Agoratoli and Burapahar, offer safaris, birdwatching and hill treks.</p>
+             <a href="/knp.html" id="knp"><span >Explore more </span></a>
+        </div>
+        <div class="gallery">
+            <h>.Bandhavgarh National Park (Madhya Pradesh)</h>
+            <p>Bandhavgarh has one of the highest tiger densities in India, set around an ancient hilltop fort. Tala, Magdhi and Khitauli are the main core zones, while the buffer forests of Dhamokhar, Panpatha and Johila offer leopards, dholes and quieter trails.</p>
+             <a href="/bnp.html" id="bnp"><span >Explore more </span></a>
+        </div>
+    </div>
+
+<section id="journey">
+    <image src="/journey.jpg" style="width:1300px"></image>
+    <h2>Your Journey Into The Wild</h2>
+    <p>
+        A jungle safari is more than just a visit to a national park. It is an opportunity to escape the busy routine of everyday life and experience the beauty of nature. From exploring dense forests and spotting magnificent wildlife to enjoying peaceful moments surrounded by nature, every journey has something special to offer. At Vanya Safari, we aim to make your visit comfortable and memorable by helping you arrange the experiences and facilities available for your chosen destination.
+    </p>
+
+</section>
+
+
+    <h style="font-weight:700; font-size:larger;margin-left: 15px; ">Available Services:</h>
+    <br><br>
+    <div id="services">
+        <div class="services">
+            <image src="/jeep.jpg"  style="border: 7px solid #173B2C; width:200px; height:200px;border-radius: 10px"></image>
+            <div>
+                <h><b>1. Private Jeep Safari</b></h>
+                <p>Enjoy a personal safari experience in a dedicated Gypsy vehicle. Explore the beauty of the forest with your family or friends at your own pace.</p>
+                
+
+            </div>
+
+        </div  >
+        <div class="services">
+            <image src="/bus.jpg"  style="border: 7px solid #173B2C; width:200px; height:200px;border-radius: 10px;"></image>
+            <div>
+                <h><b>2. Shared Canter Safari</b></h>
+                <p>Enjoy a forest safari in a spacious canter vehicle shared with other visitors. An affordable option for individuals and small groups.</p>
+                
+
+            </div>
+
+        </div>
+        <div  class="services">
+            <image src="/nightstay.jpg"  style="border: 7px solid #173B2C; width:200px; height:200px;border-radius: 10px;"></image>
+            <div>
+                <h><b>3.Night SDtay & Accomodation</b></h>
+                <p>Extend your adventure with a comfortable overnight stay surrounded by nature. Relax and enjoy a peaceful night after your wildlife exploration</p>
+                <p><b>Meal information:</b> Meals are available from our menu and charged separately according to your selection.</p>
+            </div>
+
+        </div>
+        <div  class="services">
+            <image src="/animal interaction.jpg"  style="border: 7px solid #173B2C; width:200px; height:200px;border-radius: 10px;"></image>
+            <div>
+                <h><b>4.Wild Animal Interactio</b>n</h>
+                <p>Enjoy a special opportunity to interact with selected animals available in the national park under authorized supervision. Get a closer look at these beautiful creatures and experience a memorable connection with nature.</p>
+                <p><b>Please Note:</b> This experience is subject to animal availability, park permissions and wildlife safety regulations. Separate charges apply.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section>
+      <h2 class="section-title" style="margin:10px;">Important Visitor Information</h2>
+      <div class="visitor-info">
+        <ul>
+            <li>
+                Always follow the instructions of authorised forest officials and guides.
+            </li>
+
+            <li>
+                Maintain silence and avoid disturbing wild animals.
+            </li>
+
+            <li>
+                Do not feed, touch or approach wild animals unless an officially authorised programme permits a specific activity.
+            </li>
+
+            <li>
+               Carry valid identification documents required for your booking.
+            </li>
+
+            <li>
+               Follow the designated safari routes and timings.
+            </li>
+
+            <li>
+                Mobile phone use is restricted in the core tourism zones under official rules.
+            </li>
+
+            <li>
+                 Safari permits and accommodation are subject to availability and park regulations.
+            </li>
+
+        </ul>
+      </div>
+    </section>
+<br>
+<br>  
+<footer id="contact">
+ <h2><center>Vanya Safari</center></h2>
+ <h3><center><Book Your Tickets Now !</center></h3>
+ <p><center><span>Phone: <a href="tel:+910000000000">+91 00000 00000</a></span>  |  <span>E-Mail: <a href="mailto:info@vanyasafari.com">info@vanyasafari.com</a></span></center></p>
+</footer>
+</body>
+</html>

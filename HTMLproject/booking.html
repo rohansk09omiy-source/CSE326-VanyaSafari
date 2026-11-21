@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>National Park Booking &amp; Payment</title>
+  <style>
+    :root{
+      --ink:#27496d;
+      --text:#34495e;
+      --accent:#2196f3;
+      --accent-dark:#1976d2;
+      --tint:#e8f0fe;
+      --line:#d5dbe3;
+      --page:#f0f4f9;
+    }
+    *{ box-sizing:border-box; }
+
+    /* ------------------ Layout ------------------ */
+    body{
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--page);
+      color:var(--text);
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      min-height:100vh;
+    }
+    .container{
+      background:#fff;
+      max-width:960px;
+      width:95%;
+      margin:2rem 0;
+      border-radius:8px;
+      box-shadow:0 4px 14px rgba(0,0,0,.12);
+      padding:2rem;
+    }
+    h1{ text-align:center; color:var(--ink); margin-top:0; }
+    h2{ margin:0 0 .5rem; color:var(--ink); font-size:1.25rem; }
+    .section-title{
+      grid-column:1 / -1;
+      margin-top:.6rem;
+      padding:.4rem .8rem;
+      background:var(--tint);
+      border-left:4px solid var(--accent);
+      font-weight:600;
+      color:var(--ink);
+    }
+
+    /* ------------------ Form ------------------ */
+    form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1.25rem 1.5rem;
+    }
+    .full-width{ grid-column:1 / -1; }
+
+    label{
+      display:block;
+      margin-bottom:.4rem;
+      font-weight:600;
+    }
+    input, textarea{
+      width:100%;
+      padding:.6rem .8rem;
+      border:1px solid #ccc;
+      border-radius:4px;
+      font:inherit;
+    }
+    input:focus-visible, textarea:focus-visible, button:focus-visible{
+      outline:3px solid rgba(33,150,243,.45);
+      outline-offset:1px;
+      border-color:var(--accent);
+    }
+    input:disabled{ background:#f3f3f3; cursor:not-allowed; }
+
+    .options{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      align-items:center;
+    }
+    .options label{
+      display:flex;
+      gap:.5rem;
+      align-items:center;
+      margin:0;
+      font-weight:normal;
+      cursor:pointer;
+    }
+    .options input{ width:auto; margin:0; }
+    .nights-row{ display:flex; flex-wrap:wrap; gap:1rem; align-items:center; }
+    .nights-row label{ display:flex; gap:.5rem; align-items:center; margin:0; cursor:pointer; }
+    .nights-row input[type="checkbox"]{ width:auto; margin:0; }
+    .nights-row input[type="number"]{ max-width:150px; }
+
+    /* ------------------ Notice ------------------ */
+    .note{
+      background:#fffbcc;
+      border-left:5px solid #ffeb3b;
+      padding:.8rem 1rem;
+      font-size:.95rem;
+      color:#555;
+    }
+
+    /* ------------------ Pricing table ------------------ */
+    .pricing-table{
+      width:100%;
+      border-collapse:collapse;
+    }
+    .pricing-table th, .pricing-table td{
+      border:1px solid #ddd;
+      padding:.5rem;
+      text-align:center;
+    }
+    .pricing-table th{ background:var(--tint); }
+    .pricing-table td:first-child{ text-align:left; }
+
+    /* ------------------ Billing ------------------ */
+    .billing{
+      background:#fafafa;
+      padding:1rem 1.25rem;
+      border:1px solid #e0e0e0;
+      border-radius:4px;
+    }
+    .billing ul{ list-style:none; margin:0 0 .75rem; padding:0; }
+    .billing li{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.25rem 0;
+      border-bottom:1px dashed var(--line);
+    }
+    .billing .empty{ color:#777; border-bottom:none; }
+    .billing .total{
+      display:flex;
+      justify-content:space-between;
+      font-size:1.2rem;
+      color:var(--ink);
+    }
+
+    /* ------------------ Buttons & messages ------------------ */
+    .actions{ grid-column:1 / -1; text-align:center; }
+    button{
+      background:var(--accent);
+      color:#fff;
+      border:none;
+      padding:.8rem 2rem;
+      font-size:1rem;
+      border-radius:4px;
+      cursor:pointer;
+      transition:background .2s;
+    }
+    button:hover{ background:var(--accent-dark); }
+    .confirmation{
+      grid-column:1 / -1;
+      padding:1rem;
+      border-left:5px solid #2e7d32;
+      background:#e8f5e9;
+      color:#1b5e20;
+    }
+    .confirmation[hidden]{ display:none; }
+
+    /* ------------------ Responsive ------------------ */
+    @media(max-width:600px){
+      form{ grid-template-columns:1fr; }
+      .container{ padding:1.25rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>National Park Booking &amp; Payment</h1>
+
+  <form id="bookingForm" novalidate>
+    <!-- ==================== SECTION 1 ==================== -->
+    <div class="section-title">1️⃣ Guest &amp; Stay Details</div>
+
+    <div class="full-width">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe"
+             autocomplete="name" required>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com"
+             autocomplete="email" required>
+    </div>
+
+    <div>
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="+1 555 123 4567"
+             autocomplete="tel" required>
+    </div>
+
+    <div>
+      <label for="people">Number of People</label>
+      <input type="number" id="people" name="people" min="1" step="1" value="1" required>
+    </div>
+
+    <div>
+      <label for="date">Visit Date</label>
+      <input type="date" id="date" name="date" required>
+    </div>
+
+    <div class="full-width nights-row">
+      <label for="nightStay">
+        <input type="checkbox" id="nightStay" name="nightStay">
+        Night Stay Required
+      </label>
+      <input type="number" id="nights" name="nights" min="1" step="1"
+             placeholder="Number of nights" aria-label="Number of nights" disabled>
+    </div>
+
+    <!-- ==================== SECTION 2 ==================== -->
+    <div class="section-title">2️⃣ Transportation (required)</div>
+
+    <div class="full-width options" role="radiogroup" aria-label="Transportation">
+      <label><input type="radio" name="transport" value="jeep" required> Personal Jeep</label>
+      <label><input type="radio" name="transport" value="bus"> Shared Bus</label>
+    </div>
+
+    <!-- ==================== SECTION 3 ==================== -->
+    <div class="section-title">3️⃣ Animal Interaction Permit (required)</div>
+
+    <div class="full-width">
+      <div class="options">
+        <label for="animalPermit">
+          <input type="checkbox" id="animalPermit" name="animalPermit" required>
+          I wish to visit / interact with the animals in the designated area.
+        </label>
+      </div>
+    </div>
+
+    <div class="full-width">
+      <label for="animalNotes">Special notes / accessibility requirements</label>
+      <textarea id="animalNotes" name="animalNotes" rows="3"
+                placeholder="e.g. wheelchair access, preferred time slot, etc."></textarea>
+    </div>
+
+    <div class="full-width note">
+      <strong>Important:</strong> Access to the animal-interaction zone is granted only
+      after a brief safety briefing conducted by park authorities. Visitors must
+      follow all posted guidelines, remain within the marked boundaries, and are
+      prohibited from feeding or handling the animals without explicit supervision.
+      The permit is non-transferable and void if the visitor violates any rule.
+      An animal visit fee is charged for each person.
+    </div>
+
+    <!-- ----- Service Pricing (filled from PRICES in the script) ----- -->
+    <div class="full-width">
+      <h2>Service Pricing (per person)</h2>
+      <table class="pricing-table">
+        <thead><tr><th>Service</th><th>Price (USD)</th></tr></thead>
+        <tbody id="pricingBody"></tbody>
+      </table>
+    </div>
+
+    <!-- ----- Billing Summary ----- -->
+    <div class="full-width billing" id="billingBox" aria-live="polite"></div>
+
+    <!-- ----- Payment Details ----- -->
+    <div class="section-title">Payment Details</div>
+
+    <div>
+      <label for="cardNumber">Card Number</label>
+      <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+             inputmode="numeric" autocomplete="cc-number" maxlength="19"
+             pattern="\d{4} \d{4} \d{4} \d{4}" title="16-digit card number" required>
+    </div>
+
+    <div>
+      <label for="exp">Expiration (MM/YY)</label>
+      <input type="text" id="exp" name="exp" placeholder="08/27"
+             inputmode="numeric" autocomplete="cc-exp" maxlength="5"
+             pattern="\d{2}/\d{2}" title="MM/YY" required>
+    </div>
+
+    <div>
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" name="cvv" placeholder="123"
+             inputmode="numeric" autocomplete="cc-csc" maxlength="4"
+             pattern="\d{3,4}" title="3 or 4 digits" required>
+    </div>
+
+    <div class="actions">
+      <button type="submit">Confirm &amp; Pay</button>
+    </div>
+
+    <div class="confirmation" id="confirmation" role="status" hidden></div>
+  </form>
+</div>
+
+<script>
+  /* ---------- Pricing (edit prices here only; the table updates itself) ---------- */
+  const PRICES = {
+    nightStay:   { label: 'Night Stay (per night)', amount: 30 },
+    jeep:        { label: 'Personal Jeep',          amount: 50 },
+    bus:         { label: 'Shared Bus',             amount: 25 },
+    animalVisit: { label: 'Animal Visit',           amount: 20 }   // extra charge per person
+  };
+
+  const form          = document.getElementById('bookingForm');
+  const peopleInput   = document.getElementById('people');
+  const dateInput     = document.getElementById('date');
+  const nightStayChk  = document.getElementById('nightStay');
+  const nightsInput   = document.getElementById('nights');
+  const animalChk     = document.getElementById('animalPermit');
+  const transportRadios = document.getElementsByName('transport');
+  const billingBox    = document.getElementById('billingBox');
+  const confirmation  = document.getElementById('confirmation');
+  const cardInput     = document.getElementById('cardNumber');
+  const expInput      = document.getElementById('exp');
+  const cvvInput      = document.getElementById('cvv');
+
+  const money = n => '$' + n.toFixed(2);
+
+  /* ---------- Pricing table ---------- */
+  document.getElementById('pricingBody').innerHTML = Object.values(PRICES)
+    .map(p => `<tr><td>${p.label}</td><td>${p.amount}</td></tr>`)
+    .join('');
+
+  /* ---------- Visit date cannot be in the past ---------- */
+  const now = new Date();
+  dateInput.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                    .toISOString().split('T')[0];
+
+  /* ---------- Night stay toggle ---------- */
+  nightStayChk.addEventListener('change', () => {
+    nightsInput.disabled = !nightStayChk.checked;
+    nightsInput.required = nightStayChk.checked;
+    if (!nightStayChk.checked) nightsInput.value = '';
+    calculateTotal();
+  });
+
+  /* ---------- Live total ---------- */
+  [peopleInput, nightsInput, animalChk, ...transportRadios].forEach(el => {
+    el.addEventListener('input', calculateTotal);
+    el.addEventListener('change', calculateTotal);
+  });
+
+  function calculateTotal() {
+    const people = Math.max(parseInt(peopleInput.value, 10) || 0, 0);
+    const lines = [];
+
+    if (nightStayChk.checked) {
+      const nights = Math.max(parseInt(nightsInput.value, 10) || 0, 0);
+      if (people && nights) {
+        lines.push([
+          `Night stay (${people} × ${nights} night${nights > 1 ? 's' : ''} × ${money(PRICES.nightStay.amount)})`,
+          people * nights * PRICES.nightStay.amount
+        ]);
+      }
+    }
+
+    const transport = Array.from(transportRadios).find(r => r.checked);
+    if (transport && people) {
+      const t = PRICES[transport.value];
+      lines.push([`${t.label} (${people} × ${money(t.amount)})`, people * t.amount]);
+    }
+
+    if (animalChk.checked && people) {
+      lines.push([
+        `Animal visit (${people} × ${money(PRICES.animalVisit.amount)})`,
+        people * PRICES.animalVisit.amount
+      ]);
+    }
+
+    const total = lines.reduce((sum, l) => sum + l[1], 0);
+
+    billingBox.innerHTML =
+      '<ul>' +
+        (lines.length
+          ? lines.map(l => `<li><span>${l[0]}</span><span>${money(l[1])}</span></li>`).join('')
+          : '<li class="empty">Choose your options to see the cost.</li>') +
+      '</ul>' +
+      `<div class="total"><span>Total Cost</span><strong>${money(total)}</strong></div>`;
+
+    return total;
+  }
+
+  calculateTotal(); // initial display
+
+  /* ---------- Card field formatting ---------- */
+  cardInput.addEventListener('input', () => {
+    const digits = cardInput.value.replace(/\D/g, '').slice(0, 16);
+    cardInput.value = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+  });
+
+  expInput.addEventListener('input', () => {
+    expInput.setCustomValidity('');
+    const digits = expInput.value.replace(/\D/g, '').slice(0, 4);
+    expInput.value = digits.length > 2 ? digits.slice(0, 2) + '/' + digits.slice(2) : digits;
+  });
+
+  cvvInput.addEventListener('input', () => {
+    cvvInput.value = cvvInput.value.replace(/\D/g, '').slice(0, 4);
+  });
+
+  function expiryIsValid(value) {
+    const m = /^(\d{2})\/(\d{2})$/.exec(value);
+    if (!m) return false;
+    const month = +m[1], year = 2000 + +m[2];
+    if (month < 1 || month > 12) return false;
+    return new Date(year, month, 1) > new Date();   // valid through the end of the expiry month
+  }
+
+  /* ---------- Submit ---------- */
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    confirmation.hidden = true;
+
+    if (!expiryIsValid(expInput.value)) {
+      expInput.setCustomValidity('Enter a valid, unexpired date as MM/YY.');
+    }
+    if (!form.reportValidity()) return;
+
+    const total = calculateTotal();
+
+    /* Replace this block with a real backend / payment-gateway call.
+       Do not send raw card numbers to your own server; use a payment provider. */
+    confirmation.textContent =
+      `Booking confirmed for ${document.getElementById('name').value.trim()} ` +
+      `on ${dateInput.value}. Total paid: ${money(total)}.`;
+    confirmation.hidden = false;
+    confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>
